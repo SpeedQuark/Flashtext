@@ -1,66 +1,49 @@
 body {
-  font-family: Arial, sans-serif;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  background-color: #f0f0f0;
-  color: #222;
-}
-
-h1, h2 {
+  font-family: sans-serif;
   text-align: center;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-label {
-  font-weight: bold;
-}
-
-input, select, button {
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
-button {
-  cursor: pointer;
-  background-color: #3a86ff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #265cbf;
-}
-
-#juego {
-  text-align: center;
-}
-
-#fraseContainer {
-  font-size: 2rem;
-  margin: 2rem 0;
-  word-wrap: break-word;
-}
-
-#botonesRespuesta {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1rem;
-}
-
-#tiempoRespuesta {
-  font-weight: bold;
-  margin-top: 1rem;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
 }
 
 .oculto {
   display: none;
+}
+
+#menu, #resultado, #juego {
+  padding: 20px;
+}
+
+.frase {
+  font-size: 2em;
+  margin: 40px auto;
+  min-height: 60px;
+}
+
+.botones {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+button {
+  padding: 15px 25px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#tiempoRespuesta {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.correcto {
+  color: green;
+}
+
+.incorrecto {
+  color: red;
 }
