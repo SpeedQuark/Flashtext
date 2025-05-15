@@ -1,49 +1,18 @@
 body {
-  font-family: sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f0f0f0;
 }
 
 .oculto {
   display: none;
 }
 
-#menu, #resultado, #juego {
-  padding: 20px;
-}
-
-.frase {
-  font-size: 2em;
-  margin: 40px auto;
-  min-height: 60px;
-}
-
-.botones {
-  position: fixed;
-  bottom: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+#menu label {
+  display: block;
+  margin: 10px 0;
 }
 
 button {
-  padding: 15px 25px;
-  font-size: 1em;
   cursor: pointer;
-}
-
-#tiempoRespuesta {
-  font-size: 1.5em;
-  margin-bottom: 20px;
-}
-
-.correcto {
-  color: green;
-}
-
-.incorrecto {
-  color: red;
 }
