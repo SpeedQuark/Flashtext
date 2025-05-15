@@ -1,3 +1,4 @@
+
 // Variables globales
 let frases = [];
 let nivelSeleccionado = "nivel1";
@@ -27,8 +28,7 @@ const btnReiniciar = document.getElementById("btnReiniciar");
 // Función para cargar las frases según nivel
 function cargarFrases() {
   frases = frasesPorNivel[nivelSeleccionado];
-  // Barajar frases para que salga al azar
-  frases = frases.sort(() => Math.random() - 0.5);
+  frases = frases.sort(() => Math.random() - 0.5); // Barajar
 }
 
 // Mostrar frase
@@ -42,14 +42,13 @@ function mostrarFrase() {
   fraseDiv.style.color = "black";
 
   const fraseActual = frases[intentosHechos];
-  // Aplicar espacio entre palabras
   fraseDiv.style.wordSpacing = `${espacioPx}px`;
   fraseDiv.textContent = fraseActual.texto;
 
   tiempoInicio = performance.now();
 }
 
-// Manejar respuesta del usuario
+// Manejar respuesta
 function responder(esCorrecto) {
   if (intentosHechos >= maxIntentos) return;
 
@@ -71,8 +70,7 @@ function responder(esCorrecto) {
 
   resultadoDiv.textContent = `Tiempo: ${Math.round(tiempoRespuesta)} ms`;
   resultadoDiv.style.color = esRespuestaCorrecta ? "green" : "red";
-
-  fraseDiv.textContent = ""; // limpiar frase
+  fraseDiv.textContent = "";
 
   setTimeout(() => {
     mostrarFrase();
@@ -93,7 +91,7 @@ function terminarJuego() {
   document.getElementById("finalPromedio").textContent = `Tiempo promedio: ${Math.round(promedio)} ms`;
 }
 
-// Reiniciar juego
+// Reiniciar
 function reiniciarJuego() {
   pantallaFinal.classList.add("oculto");
   menu.classList.remove("oculto");
@@ -123,7 +121,7 @@ btnIniciar.addEventListener("click", () => {
   incorrectas = 0;
   tiempos = [];
 
-  mostrarFrase();  // <-- Muy importante para que empiece mostrando la frase
+  mostrarFrase();
 });
 
 btnCorrecto.addEventListener("click", () => responder(true));
