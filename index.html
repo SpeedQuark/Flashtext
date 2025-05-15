@@ -2,55 +2,58 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Juego de Frases</title>
   <link rel="stylesheet" href="estilo.css" />
 </head>
 <body>
   <div id="menu">
-    <h1>Configuración del Juego</h1>
-    <form id="configForm">
-      <label for="nivel">Nivel:</label>
+    <h1>Juego de Frases</h1>
+    <label>
+      Seleccionar nivel:
       <select id="nivel">
-        <option value="1">Nivel 1</option>
-        <option value="2">Nivel 2</option>
-        <option value="3">Nivel 3</option>
-        <option value="4">Nivel 4</option>
-        <option value="5">Nivel 5</option>
-      </select><br/>
-
-      <label for="espaciado">Espacio entre palabras (px):</label>
-      <input type="number" id="espaciado" value="5" /><br/>
-
-      <label for="intentos">Número de intentos:</label>
-      <input type="number" id="intentos" value="5" /><br/>
-
-      <label for="tiempo">Tiempo de muestra (ms):</label>
-      <input type="number" id="tiempo" value="3000" /><br/>
-
-      <button type="submit">Iniciar juego</button>
-    </form>
+        <option value="nivel1">Nivel 1 (2 palabras)</option>
+        <option value="nivel2">Nivel 2 (3 palabras)</option>
+        <option value="nivel3">Nivel 3 (4 palabras)</option>
+        <option value="nivel4">Nivel 4 (5 palabras)</option>
+        <option value="nivel5">Nivel 5 (6 palabras)</option>
+      </select>
+    </label>
+    <label>
+      Espacio entre palabras (px):
+      <input type="number" id="espacio" min="0" value="10" />
+    </label>
+    <label>
+      Número de intentos:
+      <input type="number" id="intentos" min="1" value="10" />
+    </label>
+    <label>
+      Tiempo de muestra (ms):
+      <input type="number" id="tiempo" min="500" value="2000" />
+    </label>
+    <button id="btnIniciar">Iniciar juego</button>
   </div>
 
   <div id="juego" class="oculto">
-    <div id="fraseContainer" class="frase"></div>
-    <div id="tiempoRespuesta"></div>
-    <div class="botones">
-      <button id="correctoBtn">Correcto</button>
-      <button id="incorrectoBtn">Incorrecto</button>
+    <div id="frase" style="margin-bottom: 50px; font-size: 2em; text-align: center;"></div>
+    <div id="resultado" style="font-size: 1.5em; text-align: center; margin-bottom: 20px;"></div>
+
+    <div id="botones" style="position: fixed; bottom: 20px; left: 0; right: 0; display: flex; justify-content: center; gap: 20px;">
+      <button id="btnCorrecto" style="padding: 10px 20px; font-size: 1.2em;">Correcto</button>
+      <button id="btnIncorrecto" style="padding: 10px 20px; font-size: 1.2em;">Incorrecto</button>
     </div>
   </div>
 
-  <div id="resultado" class="oculto">
-    <h2>Resultados</h2>
-    <p id="resumenIntentos"></p>
-    <p id="resumenCorrectas"></p>
-    <p id="resumenIncorrectas"></p>
-    <p id="resumenTiempo"></p>
-    <button id="reiniciarBtn">Volver al menú</button>
+  <div id="pantallaFinal" class="oculto" style="text-align:center; padding:20px;">
+    <h2>Resultados finales</h2>
+    <p id="finalIntentos"></p>
+    <p id="finalCorrectas"></p>
+    <p id="finalIncorrectas"></p>
+    <p id="finalPromedio"></p>
+    <button id="btnReiniciar">Reiniciar juego</button>
   </div>
 
   <script src="frases.js"></script>
-  <script src="juego.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
