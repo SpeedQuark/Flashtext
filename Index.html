@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Juego de Frases - Selección</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+  <main>
+    <h1>Juego de Frases</h1>
+
+    <section id="menu">
+      <form id="configForm">
+        <label for="nivel">Seleccionar nivel:</label>
+        <select id="nivel" required>
+          <option value="1">Nivel 1 (2 palabras)</option>
+          <option value="2">Nivel 2 (3 palabras)</option>
+          <option value="3">Nivel 3 (4 palabras)</option>
+          <option value="4">Nivel 4 (4-5 palabras)</option>
+          <option value="5">Nivel 5 (6+ palabras)</option>
+        </select>
+
+        <label for="espaciado">Espacio entre palabras (px):</label>
+        <input type="number" id="espaciado" min="0" max="50" value="10" required />
+
+        <label for="intentos">Número de intentos:</label>
+        <input type="number" id="intentos" min="1" max="100" value="10" required />
+
+        <label for="tiempo">Tiempo de muestra por frase (ms):</label>
+        <input type="number" id="tiempo" min="500" max="10000" step="100" value="3000" required />
+
+        <button type="submit">Comenzar juego</button>
+      </form>
+    </section>
+
+    <section id="juego" class="oculto">
+      <div id="fraseContainer"></div>
+      <div id="botonesRespuesta">
+        <button id="correctoBtn">Correcta</button>
+        <button id="incorrectoBtn">Incorrecta</button>
+      </div>
+      <p id="tiempoRespuesta"></p>
+    </section>
+
+    <section id="resultado" class="oculto">
+      <h2>Resultados</h2>
+      <p id="resumenIntentos"></p>
+      <p id="resumenCorrectas"></p>
+      <p id="resumenIncorrectas"></p>
+      <p id="resumenTiempo"></p>
+      <button id="reiniciarBtn">Volver al menú</button>
+    </section>
+  </main>
+
+  <script src="frases.js"></script>
+  <script src="juego.js"></script>
+</body>
+</html>
