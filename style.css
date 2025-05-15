@@ -1,0 +1,66 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background-color: #f0f0f0;
+  color: #222;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: bold;
+}
+
+input, select, button {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  cursor: pointer;
+  background-color: #3a86ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #265cbf;
+}
+
+#juego {
+  text-align: center;
+}
+
+#fraseContainer {
+  font-size: 2rem;
+  margin: 2rem 0;
+  word-wrap: break-word;
+}
+
+#botonesRespuesta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+#tiempoRespuesta {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.oculto {
+  display: none;
+}
