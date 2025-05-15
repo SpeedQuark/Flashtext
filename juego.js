@@ -1,106 +1,89 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const configForm = document.getElementById("configForm");
-  const menu = document.getElementById("menu");
-  const juego = document.getElementById("juego");
-  const resultado = document.getElementById("resultado");
-  const fraseContainer = document.getElementById("fraseContainer");
+let frases = [];
+let intentosTotales = 0;
+let fraseActual = 0;
+let tiempos = [];
+let correctas = 0;
+let incorrectas = 0;
+let mostrarMs = 0;
+let tiempoInicio = 0;
 
-  // Configuración del juego
-  let nivel = 1;
-  let espaciado = 5;
-  let intentosTotales = 5;
-  let tiempoPorFrase = 3000;
-  let frases = [];
-  let intentoActual = 0;
-  let tiempos = [];
-  let correctas = 0;
-  let incorrectas = 0;
-  let fraseActual = '';
-  let tiempoInicio = 0;
+document.getElementById('configForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const nivel = parseInt(document.getElementById('nivel').value);
+  const espaciado = parseInt(document.getElementById('espaciado').value);
+  intentosTotales = parseInt(document.getElementById('intentos').value);
+  mostrarMs = parseInt(document.getElementById('tiempo').value);
 
-  configForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+  frases = [...frasesPorNivel[nivel]];
+  frases = frases.sort(() => 0.5 - Math.random()).slice(0, intentosTotales);
 
-    // Leer configuraciones
-    nivel = parseInt(document.getElementById("nivel").value);
-    espaciado = parseInt(document.getElementById("espaciado").value);
-    intentosTotales = parseInt(document.getElementById("intentos").value);
-    tiempoPorFrase = parseInt(document.getElementById("tiempo").value);
+  document.documentElement.style.setProperty('--espaciado', `${espaciado}px`);
 
-    // Preparar frases
-    frases = frasesPorNivel[nivel];
-    intentoActual = 0;
-    tiempos = [];
-    correctas = 0;
-    incorrectas = 0;
+  document.getElementById('menu').classList.add('oculto');
+  document.getElementById('resultado').classList.add('oculto');
+  document.getElementById('juego').classList.remove('oculto');
 
-    // Cambiar a vista de juego
-    menu.classList.add("oculto");
-    resultado.classList.add("oculto");
-    juego.classList.remove("oculto");
+  fraseActual = 0;
+  correctas = 0;
+  incorrectas = 0;
+  tiempos = [];
 
-    siguienteFrase();
-  });
+  mostrarFrase();
+});
 
-  function siguienteFrase() {
-    if (intentoActual >= intentosTotales) {
-      terminarJuego();
-      return;
-    }
+function mostrarFrase() {
+  const frase = frases[fraseActual];
+  const fraseContainer = document.getElementById('fraseContainer');
+  fraseContainer.textContent = frase.texto;
+  document.getElementById('tiempoRespuesta').textContent = '';
+  tiempoInicio = Date.now();
+}
 
-    // Elegir frase al azar
-    const index = Math.floor(Math.random() * frases.length);
-    fraseActual = frases[index];
-    fraseContainer.innerHTML = fraseActual
-      .split(' ')
-      .map(p => `<span style="margin-right: ${espaciado}px">${p}</span>`)
-      .join('');
+function procesarRespuesta(usuarioDiceCorrecta) {
+  const tiempoFin = Date.now();
+  let delta = tiempoFin - tiempoInicio;
+  const esCorrecta = frases[fraseActual].correcta === usuarioDiceCorrecta;
 
-    tiempoInicio = Date.now();
-    intentoActual++;
+  const resultado = document.getElementById('tiempoRespuesta');
+  resultado.className = '';
+
+  if (esCorrecta) {
+    correctas++;
+    resultado.classList.add('correcto');
+  } else {
+    incorrectas++;
+    resultado.classList.add('incorrecto');
+    delta += 2000;
   }
 
-  function responder(correcto) {
-    const tiempoRespuesta = Date.now() - tiempoInicio;
-    tiempos.push(tiempoRespuesta);
+  resultado.textContent = `${delta} ms`;
+  tiempos.push(delta);
 
-    // Aquí puedes usar lógica para saber si la frase estaba correcta o no (por ahora, todas son correctas)
-    if (correcto) {
-      correctas++;
+  fraseActual++;
+  setTimeout(() => {
+    document.getElementById('fraseContainer').textContent = '';
+    document.getElementById('tiempoRespuesta').textContent = '';
+    if (fraseActual < frases.length) {
+      setTimeout(mostrarFrase, 200);
     } else {
-      incorrectas++;
+      mostrarResultado();
     }
+  }, 1000);
+}
 
-    document.getElementById("tiempoRespuesta").textContent = `Tiempo: ${tiempoRespuesta} ms`;
+function mostrarResultado() {
+  document.getElementById('juego').classList.add('oculto');
+  document.getElementById('resultado').classList.remove('oculto');
+  document.getElementById('resumenIntentos').textContent = `Intentos: ${frases.length}`;
+  document.getElementById('resumenCorrectas').textContent = `Correctas: ${correctas}`;
+  document.getElementById('resumenIncorrectas').textContent = `Incorrectas: ${incorrectas}`;
+  const promedio = tiempos.reduce((a, b) => a + b, 0) / tiempos.length;
+  document.getElementById('resumenTiempo').textContent = `Promedio: ${Math.round(promedio)} ms`;
+}
 
-    setTimeout(() => {
-      siguienteFrase();
-    }, 500);
-  }
-
-  document.getElementById("correctoBtn").addEventListener("click", () => {
-    responder(true);
-  });
-
-  document.getElementById("incorrectoBtn").addEventListener("click", () => {
-    responder(false);
-  });
-
-  document.getElementById("reiniciarBtn").addEventListener("click", () => {
-    juego.classList.add("oculto");
-    resultado.classList.add("oculto");
-    menu.classList.remove("oculto");
-  });
-
-  function terminarJuego() {
-    juego.classList.add("oculto");
-    resultado.classList.remove("oculto");
-
-    const promedio = Math.round(tiempos.reduce((a, b) => a + b, 0) / tiempos.length);
-
-    document.getElementById("resumenIntentos").textContent = `Intentos: ${intentoActual}`;
-    document.getElementById("resumenCorrectas").textContent = `Correctas: ${correctas}`;
-    document.getElementById("resumenIncorrectas").textContent = `Incorrectas: ${incorrectas}`;
-    document.getElementById("resumenTiempo").textContent = `Promedio de tiempo: ${promedio} ms`;
-  }
+document.getElementById('correctoBtn').addEventListener('click', () => procesarRespuesta(true));
+document.getElementById('incorrectoBtn').addEventListener('click', () => procesarRespuesta(false));
+document.getElementById('reiniciarBtn').addEventListener('click', () => {
+  document.getElementById('menu').classList.remove('oculto');
+  document.getElementById('resultado').classList.add('oculto');
 });
