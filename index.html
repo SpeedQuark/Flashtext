@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,41 +17,36 @@
           <option value="3">Nivel 3</option>
           <option value="4">Nivel 4</option>
           <option value="5">Nivel 5</option>
-        </select>
+        </select><label for="espaciado">Espacio entre palabras (px):</label>
+    <input type="number" id="espaciado" value="5" required />
 
-        <label for="espaciado">Espacio entre palabras (px):</label>
-        <input type="number" id="espaciado" value="5" required />
+    <label for="intentos">Número de intentos:</label>
+    <input type="number" id="intentos" value="5" required />
 
-        <label for="intentos">Número de intentos:</label>
-        <input type="number" id="intentos" value="5" required />
+    <label for="tiempo">Tiempo de muestra por frase (ms):</label>
+    <input type="number" id="tiempo" value="5000" required />
 
-        <label for="tiempo">Tiempo de muestra por frase (ms):</label>
-        <input type="number" id="tiempo" value="5000" required />
+    <button type="submit">Iniciar Juego</button>
+  </form>
+</div>
 
-        <button type="submit">Iniciar Juego</button>
-      </form>
-    </div>
-
-    <div id="juego" class="oculto">
-      <div id="fraseContainer"></div>
-      <div>
-        <button id="correctoBtn">Correcto</button>
-        <button id="incorrectoBtn">Incorrecto</button>
-      </div>
-      <p id="tiempoRespuesta"></p>
-    </div>
-
-    <div id="resultado" class="oculto">
-      <h2>Resultado</h2>
-      <p id="resumenIntentos"></p>
-      <p id="resumenCorrectas"></p>
-      <p id="resumenIncorrectas"></p>
-      <p id="resumenTiempo"></p>
-      <button id="reiniciarBtn">Volver al menú</button>
-    </div>
+<div id="juego" class="oculto">
+  <div id="fraseContainer"></div>
+  <div>
+    <button id="correctoBtn">Correcto</button>
+    <button id="incorrectoBtn">Incorrecto</button>
   </div>
+  <p id="tiempoRespuesta"></p>
+</div>
 
-  <script src="frases.js"></script>
-  <script src="juego.js"></script>
-</body>
+<div id="resultado" class="oculto">
+  <h2>Resultado</h2>
+  <p id="resumenIntentos"></p>
+  <p id="resumenCorrectas"></p>
+  <p id="resumenIncorrectas"></p>
+  <p id="resumenTiempo"></p>
+  <button id="reiniciarBtn">Volver al menú</button>
+</div>
+
+  </div>  <script src="frases.js"></script>  <script src="juego.js"></script></body>
 </html>
